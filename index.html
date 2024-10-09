@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Tiny Kingdoms - Browser Game</title>
+    <!-- Подключаем шрифт Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap">
+    <style>
+        /* Общие стили */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #f0f0f0;
+            background-color: #121212;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Стили кнопок */
+        .primary-btn, .secondary-btn, .secondary-btn-alt, .contact-menu {
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 4px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .primary-btn {
+            background-color: #1e88e5;
+            color: #fff;
+            border: 1px solid #1e88e5;
+        }
+        .primary-btn:hover {
+            background-color: #1565c0;
+            border-color: #1565c0;
+        }
+        .secondary-btn, .secondary-btn-alt {
+            background-color: transparent;
+            color: #1e88e5;
+            border: 1px solid #1e88e5;
+        }
+        .secondary-btn:hover, .secondary-btn-alt:hover {
+            background-color: #1e88e5;
+            color: #fff;
+        }
+        .contact-menu {
+            background-color: transparent;
+            color: #1e88e5;
+            border: 1px solid #1e88e5;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .contact-menu:hover {
+            background-color: #1e88e5;
+            color: #fff;
+        }
+        /* Навигация */
+        .navbar {
+            background-color: #1f1f1f;
+            display: flex;
+            align-items: center;
+            height: 72px;
+            padding: 0 64px;
+            border-bottom: 1px solid #333;
+        }
+        .nav-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .logo-wrapper {
+            flex: 1;
+        }
+        .logo {
+            height: 50px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .nav-link {
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px;
+            color: #f0f0f0;
+        }
+        .nav-link:hover {
+            color: #1e88e5;
+        }
+        /* Hero Section */
+        .hero-section {
+            background-color: #121212;
+            padding: 80px 64px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #f0f0f0;
+        }
+        .hero-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 8px;
+        }
+        .hero-text {
+            flex: 1 1 500px;
+        }
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        .hero-description {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        .hero-image {
+            flex: 1 1 400px;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 8px;
+        }
+        /* Features Section */
+        .features-section {
+            padding: 80px 64px;
+            background-color: #1f1f1f;
+            text-align: center;
+            color: #f0f0f0;
+        }
+        .section-header {
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        .tagline {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e88e5;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 16px 0;
+        }
+        .subtitle {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+        .feature-item {
+            flex: 1 1 300px;
+            max-width: 300px;
+            text-align: left;
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+        }
+        .feature-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+        .feature-description {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-top: 8px;
+            color: #ccc;
+        }
+        /* Testimonial Section */
+        .testimonial-section {
+            background-color: #121212;
+            padding: 80px 64px;
+            text-align: center;
+            color: #f0f0f0;
+        }
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+        }
+        .star-icon {
+            width: 24px;
+            height: 24px;
+        }
+        .testimonial-quote {
+            font-size: 24px;
+            font-weight: 500;
+            margin: 32px 0;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        .author-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+        }
+        .author-info {
+            text-align: left;
+        }
+        .author-name {
+            font-weight: 600;
+        }
+        .author-title {
+            font-weight: 400;
+            color: #777;
+        }
+        /* Gallery Section (Game Section) */
+        .gallery-section {
+            padding: 80px 64px;
+            background-color: #1f1f1f;
+            text-align: center;
+            color: #f0f0f0;
+        }
+        .gallery-header {
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .gallery-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .gallery-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        #unity-player {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        /* CTA Section */
+        .cta-section {
+            background-color: #121212;
+            padding: 80px 64px;
+            text-align: center;
+            color: #f0f0f0;
+        }
+        .cta-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .cta-content {
+            flex: 1 1 500px;
+            text-align: left;
+        }
+        .cta-image {
+            flex: 1 1 400px;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 8px;
+        }
+        .cta-features {
+            list-style: none;
+            padding: 0;
+            margin: 32px 0;
+        }
+        .cta-features .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .cta-features .feature-icon {
+            width: 24px;
+            height: 24px;
+        }
+        .feature-text {
+            color: #ccc;
+        }
+        /* Footer */
+        .footer {
+            background-color: #1f1f1f;
+            padding: 40px 64px;
+            border-top: 1px solid #333;
+            color: #f0f0f0;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .footer-link {
+            text-decoration: underline;
+            color: #1e88e5;
+        }
+        .footer-link:hover {
+            color: #64b5f6;
+        }
+        @media (max-width: 768px) {
+            .hero-section, .features-section, .testimonial-section, .gallery-section, .cta-section {
+                padding: 60px 20px;
+            }
+            .navbar {
+                padding: 0 20px;
+            }
+            .hero-content, .cta-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-text, .cta-content {
+                text-align: center;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<audio id="background-music" src="background_music.mp3" loop></audio>
+    <section class="landing-container">
+        <!-- Навигация -->
+        <header class="navbar">
+            <div class="nav-content">
+                <div class="logo-wrapper">
+                    <img src="my_logo.png" alt="Tiny Kingdoms Logo" class="logo" />
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link" onclick="scrollToGame()">Play Now</a>
+                    <a href="#about" class="nav-link">About Us</a>
+                    <a href="#features" class="nav-link">Game Features</a>
+                    <button class="contact-menu" onclick="showContactInfo()">Contact Us</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="main-title">Join the Epic Battles of Tiny Kingdoms</h1>
+                    <p class="hero-description">Dive into a world of strategy and adventure with our browser-based game. Build your kingdom, forge alliances, and conquer your foes in thrilling real-time battles!</p>
+                    <div class="cta-buttons">
+                        <button class="primary-btn" onclick="scrollToGame()">Play</button>
+                        <button class="secondary-btn">Learn More</button>
+                    </div>
+                </div>
+                <img src="hero_image.png" alt="Tiny Kingdoms Gameplay" class="hero-image" />
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="section-header">
+                <span class="tagline">Conquer</span>
+                <h2 class="title">Master the Art of Tiny Kingdom Battles</h2>
+                <p class="subtitle">Embark on an epic journey in our browser-based game. Create your account and dive into the world of tiny kingdoms, where strategy and skill reign supreme.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <img src="icon1.png" alt="Play Now Icon" class="feature-icon" />
+                    <h3 class="feature-title">Begin to play right now</h3>
+                    <p class="feature-description">Start your adventure without any downloads.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="icon2.png" alt="Challenge Icon" class="feature-icon" />
+                    <h3 class="feature-title">Challenge yourself</h3>
+                    <p class="feature-description">Optimize your strategy and tactics.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="icon3.png" alt="Battle Icon" class="feature-icon" />
+                    <h3 class="feature-title">Join Battles</h3>
+                    <p class="feature-description">Compete with other players in real-time.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section class="testimonial-section">
+            <div class="testimonial-content">
+                <div class="star-rating">
+                    <img src="star_filled.png" alt="Star" class="star-icon" />
+                    <img src="star_filled.png" alt="Star" class="star-icon" />
+                    <img src="star_filled.png" alt="Star" class="star-icon" />
+                    <img src="star_filled.png" alt="Star" class="star-icon" />
+                    <img src="star_filled.png" alt="Star" class="star-icon" />
+                </div>
+                <blockquote class="testimonial-quote">"This game has transformed my free time into epic adventures! I can't get enough of the strategic battles and charming graphics."</blockquote>
+                <div class="testimonial-author">
+                    <img src="author_avatar.jpg" alt="Author Avatar" class="author-avatar" />
+                    <div class="author-info">
+                        <span class="author-name">Meshanya's mother</span>
+                        <span class="author-title">Gamer, Enthusiast</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <div class="cta-content">
+                    <span class="tagline">Conquer</span>
+                    <h2 class="title">Join the Epic Battles of Tiny Kingdoms</h2>
+                    <p class="subtitle">Dive into a world of strategy and adventure. Build your kingdom and lead your armies to victory.</p>
+                    <ul class="cta-features">
+                        <li class="feature-item">
+                            <img src="check_icon.png" alt="Feature Icon" class="feature-icon" />
+                            <span class="feature-text">Engage in thrilling real-time multiplayer battles.</span>
+                        </li>
+                        <li class="feature-item">
+                            <img src="check_icon.png" alt="Feature Icon" class="feature-icon" />
+                            <span class="feature-text">Unleash your creativity and forge powerful alliances.</span>
+                        </li>
+                        <li class="feature-item">
+                            <img src="check_icon.png" alt="Feature Icon" class="feature-icon" />
+                            <span class="feature-text">Experience stunning graphics powered by Unity technology.</span>
+                        </li>
+                    </ul>
+                    <div class="cta-buttons">
+                        <button class="primary-btn" onclick="scrollToGame()">Play</button>
+                        <a href="#learn-more" class="secondary-btn">Learn More</a>
+                    </div>
+                </div>
+                <img src="cta_image.png" alt="CTA Image" class="cta-image" />
+            </div>
+        </section>
+
+        <!-- Game Section (Unity Player) -->
+        <section id="game-section" class="gallery-section">
+            <div class="gallery-header">
+                <h2 class="gallery-title">Play Tiny Kingdoms</h2>
+                <p class="gallery-description">Start your adventure now!</p>
+            </div>
+            <div id="unity-player">
+                <!-- Вставьте здесь код вашего Unity WebGL Player -->
+                <!-- Пример: -->
+                <iframe src="Build/index.html" width="960" height="600" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <span>© 2024 Tiny Kingdoms. All rights reserved.</span>
+                <nav class="footer-nav">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Cookies Settings</a>
+                </nav>
+            </div>
+        </footer>
+    </section>
+
+    <!-- Скрипты -->
+    <script>
+	function playBackgroundMusic() {
+            var music = document.getElementById('background-music');
+            if (music.paused) {
+                music.play().catch(function(error) {
+                    console.log('Автоматическое воспроизведение запрещено браузером.');
+                });
+            }
+        }
+
+        // Добавляем слушатель событий для взаимодействия пользователя
+        document.addEventListener('click', playBackgroundMusic);
+        document.addEventListener('keydown', playBackgroundMusic);
+        function scrollToGame() {
+            document.getElementById('game-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showContactInfo() {
+            alert('Свяжитесь с нами по электронной почте: Komandarm.s@mail.ru');
+        }
+    </script>
+</body>
+</html>
